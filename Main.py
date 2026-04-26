@@ -1,14 +1,15 @@
 import time  #(16.03.2026)
 import random
 from turtle import *
+import tkinter
 
 def Enter():  #(13.03.2026)
-    VN = "a9.1.0"
+    VN = "a10.0.0PR"
     global VipAccess, PassGuess, AdminAccess
     VipAccess = "F"
     Password = str(1041)
     PassGuess = 0
-    print("--- HubBase (base - "+VN+") (plus, Apr 22 2026, 18:33:15) ---")
+    print("--- HubBase (base - "+VN+") (plus, Apr 25 2026, 12:56:38) ---")
     while PassGuess != Password:
         Num = input("Number = ")
         Num2 = input("Number2 = ")
@@ -324,6 +325,29 @@ def Programm16():  #(15.04.2026)
         pendown()
         Snowflake(size)
 
+def Programm17():  #(24.04.2026)
+    window1 = tkr.Tk()
+    button1 = tkr.Button(window1, text="Do not press this button", width=40)
+    button1.pack(padx=10, pady=10)
+    global clicks1
+    clicks1 = 0
+
+    def onClick(event):
+        global clicks1
+        clicks1 = clicks1 + 1
+        if clicks1 == 1:
+            button1.configure(text="Seriously? Do. Not. Press. It.")
+        elif clicks1 == 2:
+            button1.configure(text="Gah! Next next time no-no-no more butt-utt-on-on")
+        elif clicks1 == 3:
+            time.sleep(1.0)
+            button1.configure(text="Opps. I said 'Next next time'")
+        else:
+            button1.pack_forget()
+
+    button1.bind("<ButtonRelease-1>", onClick)
+    window1.mainloop()
+        
 def ProgrammP1():  #T1
 
     def Drift():  #(19.03.2026)
@@ -412,6 +436,51 @@ def ProgrammP2():  #T3
     for l in CES:
         CESP = CESP + l + " "
     print(CESP)
+
+def ProgrammP3():  #T4
+    window = tkinter.Tk()
+    button1 = tkinter.Button(window, text="Do not press this button", width=40)
+    button1.pack(padx=50, pady=20)
+    global clicks1
+    clicks1 = 0
+    
+    def onClick(event):
+        global clicks1
+        clicks1 = clicks1 + 1
+        shape("turtle")
+        speed(10)
+        pensize(6)
+        Screen().bgcolor("turquoise")
+        def VShape(size):
+            right(25)
+            forward(size)
+            backward(size)
+            left(50)
+            forward(size)
+            backward(size)
+            right(25)
+
+        def SnowflakeArm(size):
+            for Cyc8 in  range(4):
+                forward(size)
+                VShape(size)
+            backward(size*4)
+
+        def Snowflake(size):
+            color('white')
+            for Cyc7 in range(4):
+                SnowflakeArm(size)
+                right(90)
+        Snowflake(20)
+        if clicks1 < 20:
+            button1.pack_forget()
+            print("Fail")
+        else:
+            button1.configure(text="You outsmarted me!")
+            print("Success")
+
+    button1.bind("<ButtonRelease-1>", onClick)
+    window.mainloop()
 
 def CTNP():  #Mainline
     Cstate = input("Continue[Y/N]").upper()
@@ -534,12 +603,21 @@ def Code():
                                                         pass
                                                     else:
                                                         Programm16()
-        ProgrammP1()
-        CTNP()
-        if Stop == 1:
-            pass
-        else:
-            ProgrammP2()
+                                                        CTNP()
+                                                        if Stop == 1:
+                                                            pass
+                                                        else:
+                                                            ProgrammP1()
+                                                            CTNP()
+                                                            if Stop == 1:
+                                                                pass
+                                                            else:
+                                                                ProgrammP2()
+                                                                CTNP()
+                                                                if Stop == 1:
+                                                                    pass
+                                                                else:
+                                                                    ProgrammP3()
     else:
         pass
     print("")  #(16.03.2026)
