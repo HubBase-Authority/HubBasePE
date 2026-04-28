@@ -768,7 +768,7 @@ def Restart():  #(16.03.2026)
                 ProgrammP2()
                 Restart()
             elif PrStart == "P3":
-                ProgrammP2()
+                ProgrammP3()
                 Restart()
             else:
                 Code()
