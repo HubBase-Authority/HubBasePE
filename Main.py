@@ -1,18 +1,17 @@
 import time  #(16.03.2026)
 import random
 from turtle import *
-import tkinter
 
 def Enter():  #(13.03.2026)
-    VN = "a10.0.0"
+    VN = "py2 - HBPE"
     global VipAccess, PassGuess, AdminAccess
     VipAccess = "F"
     Password = str(1041)
     PassGuess = 0
-    print("--- HubBase (base - "+VN+") (plus, Apr 27 2026, 12:13:14) ---")
+    print("--- HubBase ("+VN+") (plus, Apr 28 2026, 19:55:17) ---")
     while PassGuess != Password:
-        Num = input("Number = ")
-        Num2 = input("Number2 = ")
+        Num = str(input("Number = "))
+        Num2 = str(input("Number2 = "))
         PassGuess = Num + Num2
         if PassGuess == str(5280):
             print("--Vip level access awarded--")
@@ -260,7 +259,7 @@ def Programm13():  #(11.04.2026)
 def Programm14():  #(12.04.2026)
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     alphabet = alphabet * 2
-    STE = input("The string that you want to encrypt -- ").upper()
+    STE = str(input("The string that you want to encrypt -- ")).upper()
     Key = int(input("Enter a number between -25 and 25 -- "))
     ES = ""
     for x in STE:
@@ -324,81 +323,6 @@ def Programm16():  #(15.04.2026)
         goto(x,y)
         pendown()
         Snowflake(size)
-
-def Programm17():  #(24.04.2026)
-    window1 = tkr.Tk()
-    button1 = tkr.Button(window1, text="Do not press this button", width=40)
-    button1.pack(padx=10, pady=10)
-    global clicks1
-    clicks1 = 0
-
-    def onClick(event):
-        global clicks1
-        clicks1 = clicks1 + 1
-        if clicks1 == 1:
-            button1.configure(text="Seriously? Do. Not. Press. It.")
-        elif clicks1 == 2:
-            button1.configure(text="Gah! Next next time no-no-no more butt-utt-on-on")
-        elif clicks1 == 3:
-            time.sleep(1.0)
-            button1.configure(text="Opps. I said 'Next next time'")
-        else:
-            button1.pack_forget()
-
-    button1.bind("<ButtonRelease-1>", onClick)
-    window1.mainloop()
-
-def Programm18():  #(27.04.2026)
-    print("To draw, use LMB.")
-    window2 = tkr.Tk()
-    canvas1 = tkr.Canvas(window2, bg="white", width=750, height=500)
-    canvas1.pack()
-    global lastX, lastY
-    lastX, lastY = 0,0
-    global Scolor
-    Scolor = "black"
-    width = int(input("How wide do you want your pencil? -- "))
-    red_id = canvas1.create_rectangle(10,10,30,30, fill="red")
-    blue_id = canvas1.create_rectangle(10,35,30,55, fill="blue")
-    black_id = canvas1.create_rectangle(10,60,30,80, fill="black")
-    white_id = canvas1.create_rectangle(10,85,30,105, fill="white")
-    
-    def StoreNewPos(event):
-        global lastX, lastY
-        lastX = event.x
-        lastY = event.y
-
-    def onClick(event):
-        StoreNewPos(event)
-
-    def onDrag(event):
-        global Scolor
-        canvas1.create_line(lastX, lastY, event.x, event.y, fill=Scolor,width=width)
-        StoreNewPos(event)
-
-    def CCTR(event):
-        global Scolor
-        Scolor = "red"
-
-    def CCTB(event):
-        global Scolor
-        Scolor = "blue"
-
-    def CCTb(event):
-        global Scolor
-        Scolor = "black"
-
-    def CCTW(event):
-        global Scolor
-        Scolor = "white"
-
-    canvas1.bind("<Button-1>", onClick)
-    canvas1.bind("<B1-Motion>", onDrag)
-    canvas1.tag_bind(red_id, "<Button-1>", CCTR)
-    canvas1.tag_bind(blue_id, "<Button-1>", CCTB)
-    canvas1.tag_bind(black_id, "<Button-1>", CCTb)
-    canvas1.tag_bind(white_id, "<Button-1>", CCTW)
-    window2.mainloop()
         
 def ProgrammP1():  #T1
 
@@ -456,321 +380,17 @@ def ProgrammP1():  #T1
 
     ProgrammP1E1()  #(19.03.2026)
 
-def ProgrammP2():  #T3
-    WordLib = ["hi"]
-    ES = input("The string that you want to encrypt -- ").split()
-    if WordLib != []:
-        print("Currently the words are:")
-        for Cyc2 in WordLib:
-            print(Cyc2)
-    Do1 = input("Do you want to add new words?[Y/N] -- ").upper()
-    if Do1 == "Y":
-        Count = input("How many? -- ")
-        for Cyc1 in range(int(Count)):
-            NewWord = [str(input("The word? -- "))]
-            WordLib = WordLib + NewWord
-            NewWord = []
-    for Cyc3 in ES:
-        if Cyc3 in WordLib:
-            pass
-        else:
-            NewESWord = [Cyc3]
-            WordLib = WordLib + NewESWord
-            NewESWord = []
-    WordLibP = WordLib
-    WordLib = WordLib * 2
-    CES = []
-    for Cyc3 in ES:
-        Index = WordLib.index(Cyc3)
-        Index = [WordLib[Index + 2]]
-        CES = CES + Index
-    CESP = ""
-    for l in CES:
-        CESP = CESP + l + " "
-    print(CESP)
-
-def ProgrammP3():  #T4
-    window = tkinter.Tk()
-    button1 = tkinter.Button(window, text="Do not press this button", width=40)
-    button1.pack(padx=50, pady=20)
-    global clicks1
-    clicks1 = 0
-    
-    def onClick(event):
-        global clicks1
-        clicks1 = clicks1 + 1
-        shape("turtle")
-        speed(10)
-        pensize(6)
-        Screen().bgcolor("turquoise")
-        def VShape(size):
-            right(25)
-            forward(size)
-            backward(size)
-            left(50)
-            forward(size)
-            backward(size)
-            right(25)
-
-        def SnowflakeArm(size):
-            for Cyc8 in  range(4):
-                forward(size)
-                VShape(size)
-            backward(size*4)
-
-        def Snowflake(size):
-            color('white')
-            for Cyc7 in range(4):
-                SnowflakeArm(size)
-                right(90)
-        Snowflake(20)
-        if clicks1 < 20:
-            button1.pack_forget()
-            print("Fail")
-        else:
-            button1.configure(text="You outsmarted me!")
-            print("Success")
-            
-
-    button1.bind("<ButtonRelease-1>", onClick)
-    window.mainloop()
-
-def CTNP():  #Mainline
-    Cstate = input("Continue[Y/N]").upper()
-    if Cstate == "Y":
-        Cstate = 1
-    elif Cstate == "N":
-        Cstate = 0
-    else:
-        print("Choose properly!")
-        Cstate = 2
-    if Cstate == 1:
-        Advance()
-    else:
-        print("Bye")
-        PStop()
-
-def Advance():  #Mainline
-    Adv = 1
-    global Stop
-    Stop = 0
-
-def PStop():  #Mainline
-    global Stop
-    Stop = 1
-
 def Start():
     ProgrammP1()
-    CTNP()
-    if Stop == 1:
-        pass
-    else:
-        ProgrammP2()
-
-def Code():
-    global Stop, VipAccess
-    print("PE programms are enabled on default!")
-    TAEstate = "N"  #(15.03.2026)
-    EPstate = "N"
-    if VipAccess == "T":
-        TAEstate = input("Skip procedure[Y/N] -- ").upper()
-    if TAEstate != "Y":
-        Programm1()
-        CTNP()
-        if Stop == 1:
-            pass
-        else:
-            Programm2()
-            CTNP()
-            if Stop == 1:
-                pass
-            else:
-                Programm3()
-                CTNP()
-                if Stop == 1:
-                    pass
-                else:
-                    Programm4()
-                    CTNP()
-                    if Stop == 1:
-                        pass
-                    else:
-                        Programm5()
-                        CTNP()
-                        if Stop == 1:  #(16.03.2026)
-                            pass
-                        else:
-                            Programm6()
-                            CTNP()
-                            if Stop == 1:  #(17.03.2026)
-                                pass
-                            else:
-                                Programm7()
-                                CTNP()
-                                if Stop == 1:  #(18.03.2026)
-                                    pass
-                                else:
-                                    Programm8()
-                                    if VipAccess == "T":  #(20.03.2026)
-                                        EPstate = input("Skip programms 9-11[Y/N] -- ").upper()
-                                    if EPstate != "Y":
-                                        CTNP()
-                                        if Stop == 1:
-                                            pass
-                                        else:
-                                            Programm9()
-                                            CTNP()
-                                            if Stop == 1:
-                                                pass
-                                            else:
-                                                Programm10()
-                                                CTNP()
-                                                if Stop == 1:
-                                                    pass
-                                                else:
-                                                    Programm11()
-                                    else:
-                                        pass
-                                    CTNP()  #(24.03.2026)
-                                    if Stop == 1:
-                                        pass
-                                    else:
-                                        Programm12()
-                                        CTNP()  #(11.04.2026)
-                                        if Stop == 1:
-                                            pass
-                                        else:
-                                            Programm13()
-                                            CTNP()  #(12.04.2026)
-                                            if Stop == 1:
-                                                pass
-                                            else:
-                                                Programm14()
-                                                CTNP()  #(15.04.2026)
-                                                if Stop == 1:
-                                                    pass
-                                                else:
-                                                    Programm15()
-                                                    CTNP()
-                                                    if Stop == 1:
-                                                        pass
-                                                    else:
-                                                        Programm16()
-                                                        CTNP()
-                                                        if Stop == 1:
-                                                            pass
-                                                        else:
-                                                            Programm17()
-                                                            CTNP()
-                                                            if Stop == 1:
-                                                                pass
-                                                            else:
-                                                                Programm18()
-                                                                CTNP()
-                                                                if Stop == 1:
-                                                                    pass
-                                                                else:
-                                                                    ProgrammP1()
-                                                                    CTNP()
-                                                                    if Stop == 1:
-                                                                        pass
-                                                                    else:
-                                                                        ProgrammP2()
-                                                                        CTNP()
-                                                                        if Stop == 1:
-                                                                            pass
-                                                                        else:
-                                                                            ProgrammP3()
-    else:
-        pass
-    print("")  #(16.03.2026)
-    print("Stop!")
-    print("")
-    print("------------------")
-    print("Checking VipAccess")
-    print("------------------")
-    print("")
-    time.sleep(1.5)
-    if VipAccess == "T":
-        print("VipAccess = 'T'")
-        Restart()
-    else:
-        print("VipAccess = 'F'")
-        print("You shall not pass")
-        global RA
-        RestartAttempt = RestAtt = RA = int(RA) + 1
-        print("Restart №"+str(RA),"initialaizing")
-        Restart()
-
-def Restart():  #(16.03.2026)
-    global E_C
-    if VipAccess == "F":
-        Code()
-    else:
-        Exit_Chioce = E_C = input("Do you want to exit the programm?[Y/N] -- ").upper()
-        if E_C == "N":
-            PrStart = input("What programm to launch? -- ")
-            if PrStart == "2":
-                Programm2()
-                Restart()
-            elif PrStart == "3":
-                Programm3()
-                Restart()
-            elif PrStart == "4":
-                Programm4()
-                Restart()
-            elif PrStart == "5":
-                Programm5()
-                Restart()
-            elif PrStart == "6":
-                Programm6()
-                Restart()
-            elif PrStart == "7":
-                Programm7()
-                Restart()
-            elif PrStart == "8":
-                Programm8()
-                Restart()
-            elif PrStart == "9":
-                Programm9()
-                Restart()
-            elif PrStart == "10":
-                Programm10()
-                Restart()
-            elif PrStart == "11":
-                Programm11()
-                Restart()
-            elif PrStart == "12":
-                Programm12()
-                Restart()
-            elif PrStart == "13":
-                Programm13()
-                Restart()
-            elif PrStart == "14":
-                Programm14()
-                Restart()
-            elif PrStart == "15":
-                Programm15()
-                Restart()
-            elif PrStart == "16":
-                Programm16()
-                Restart()
-            elif PrStart == "17":
-                Programm17()
-                Restart()
-            elif PrStart == "18":
-                Programm18()
-                Restart()
-            elif PrStart == "P1":
-                ProgrammP1()
-                Restart()
-            elif PrStart == "P2":
-                ProgrammP2()
-                Restart()
-            elif PrStart == "P3":
-                ProgrammP2()
-                Restart()
-            else:
-                Code()
-        else:
-            pass
+    Programm1()
+    Programm2()
+    Programm3()
+    Programm6()
+    Programm9()
+    Programm10()
+    Programm11()
+    Programm12()
+    Programm13()
+    Programm15()
+    Programm16()
+    
