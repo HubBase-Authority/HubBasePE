@@ -3,6 +3,7 @@ import random
 from turtle import *
 import tkinter as tkr
 __version__ = "0.0.2.0.04"
+__parameters__ = "(plus, June 10 2026, 17:05:45)"
 
 
 def Enter():  # (13.03.2026)
@@ -10,7 +11,7 @@ def Enter():  # (13.03.2026)
     Vips = ["voice659", "vhba", "vipuser", 'hbaofficial', "vvoice", "voice", "v", "vip1"]
     VipAccess = "F"
     PassGuess = 0
-    print("--- HubBase " + __version__ + " (plus, June 10 2026, 17:05:45) ---")
+    print(f"--- HubBase {__version__} {__parameters__} ---")
     Login = input("Login (If <vip level then press enter): ").lower()
     if Login in Vips:
         Password = str(5280)
