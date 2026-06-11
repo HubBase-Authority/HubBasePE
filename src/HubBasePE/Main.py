@@ -2,8 +2,34 @@ import time  # (16.03.2026)
 import random
 from turtle import *
 import tkinter as tkr
-__version__ = "0.0.2.0.04"
-__parameters__ = "(plus, June 10 2026, 17:05:45)"
+
+__version__ = "0.0.2.0.05"
+__parameters__ = "(plus, June 11 2026, 22:02:56)"
+
+
+def ProgrammCycle(ProgrammNumber: int, programmList: dict, TransitionMethod, TransitionMethodargs: list):
+    for programm in range(1, ProgrammNumber + 1):
+        print(f"Programm №{programm} launching")
+        try:
+            programmList[programm]()
+            TransitionMethod(*TransitionMethodargs)
+        except KeyError:
+            print(f"KeyError: Key {programm} is out of reach")
+            break
+
+
+def Setup_HubBase():  # (11.06.2026)
+    global RA, VipAccess
+    RA = 0
+    prList = {1: Programm1, 2: Programm2, 3: Programm3, 4: Programm4, 5: Programm5, 6: Programm6, 7: Programm7,
+              8: Programm8, 9: Programm9, 10: Programm10, 11: Programm11, 12: Programm12, 13: Programm13,
+              14: Programm14, 15: Programm15, 16: Programm16, 17: Programm17, 18: Programm18, 19: Programm19,
+              20: Programm20, 21: Main.ProgrammP1, 22: Main.ProgrammP2, 23: Main.ProgrammP3, 24: Main.ProgrammP4,
+              25: Main.ProgrammP5}
+    prNum = 25
+    pprList = {21: Main.ProgrammP1, 22: Main.ProgrammP2, 23: Main.ProgrammP3, 24: Main.ProgrammP4,
+               25: Main.ProgrammP5}
+    pprNum = 5
 
 
 def Enter():  # (13.03.2026)
@@ -892,7 +918,7 @@ def ProgrammP5():
 
 
 def CTNP():  # Mainline
-    Cstate = input("Continue[Y/N]").upper()
+    Cstate = input("Continue[Y/N] -- ").upper()
     if Cstate == "Y":
         Cstate = 1
     elif Cstate == "N":
@@ -919,27 +945,7 @@ def PStop():  # Mainline
 
 
 def Start():
-    ProgrammP1()
-    CTNP()
-    if Stop == 1:
-        pass
-    else:
-        ProgrammP2()
-        CTNP()
-        if Stop == 1:
-            pass
-        else:
-            ProgrammP3()
-            CTNP()
-            if Stop == 1:
-                pass
-            else:
-                ProgrammP4()
-                CTNP()
-                if Stop == 1:
-                    pass
-                else:
-                    ProgrammP5()
+    ProgrammCycle(pprNum, pprList, CTNP, [])
 
 
 def Code():
@@ -950,132 +956,7 @@ def Code():
     if VipAccess == "T":
         TAEstate = input("Skip procedure[Y/N] -- ").upper()
     if TAEstate != "Y":
-        Programm1()
-        CTNP()
-        if Stop == 1:
-            pass
-        else:
-            Programm2()
-            CTNP()
-            if Stop == 1:
-                pass
-            else:
-                Programm3()
-                CTNP()
-                if Stop == 1:
-                    pass
-                else:
-                    Programm4()
-                    CTNP()
-                    if Stop == 1:
-                        pass
-                    else:
-                        Programm5()
-                        CTNP()
-                        if Stop == 1:  # (16.03.2026)
-                            pass
-                        else:
-                            Programm6()
-                            CTNP()
-                            if Stop == 1:  # (17.03.2026)
-                                pass
-                            else:
-                                Programm7()
-                                CTNP()
-                                if Stop == 1:  # (18.03.2026)
-                                    pass
-                                else:
-                                    Programm8()
-                                    if VipAccess == "T":  # (20.03.2026)
-                                        EPstate = input("Skip programms 9-11[Y/N] -- ").upper()
-                                    if EPstate != "Y":
-                                        CTNP()
-                                        if Stop == 1:
-                                            pass
-                                        else:
-                                            Programm9()
-                                            CTNP()
-                                            if Stop == 1:
-                                                pass
-                                            else:
-                                                Programm10()
-                                                CTNP()
-                                                if Stop == 1:
-                                                    pass
-                                                else:
-                                                    Programm11()
-                                    else:
-                                        pass
-                                    CTNP()  # (24.03.2026)
-                                    if Stop == 1:
-                                        pass
-                                    else:
-                                        Programm12()
-                                        CTNP()  # (11.04.2026)
-                                        if Stop == 1:
-                                            pass
-                                        else:
-                                            Programm13()
-                                            CTNP()  # (12.04.2026)
-                                            if Stop == 1:
-                                                pass
-                                            else:
-                                                Programm14()
-                                                CTNP()  # (15.04.2026)
-                                                if Stop == 1:
-                                                    pass
-                                                else:
-                                                    Programm15()
-                                                    CTNP()
-                                                    if Stop == 1:
-                                                        pass
-                                                    else:
-                                                        Programm16()
-                                                        CTNP()
-                                                        if Stop == 1:
-                                                            pass
-                                                        else:
-                                                            Programm17()
-                                                            CTNP()
-                                                            if Stop == 1:
-                                                                pass
-                                                            else:
-                                                                Programm18()
-                                                                CTNP()
-                                                                if Stop == 1:
-                                                                    pass
-                                                                else:
-                                                                    Programm19()
-                                                                    CTNP()
-                                                                    if Stop == 1:
-                                                                        pass
-                                                                    else:
-                                                                        Programm20()
-                                                                        CTNP()
-                                                                        if Stop == 1:
-                                                                            pass
-                                                                        else:
-                                                                            ProgrammP1()
-                                                                            CTNP()
-                                                                            if Stop == 1:
-                                                                                pass
-                                                                            else:
-                                                                                ProgrammP2()
-                                                                                CTNP()
-                                                                                if Stop == 1:
-                                                                                    pass
-                                                                                else:
-                                                                                    ProgrammP3()
-                                                                                    CTNP()
-                                                                                    if Stop == 1:
-                                                                                        pass
-                                                                                    else:
-                                                                                        ProgrammP4()
-                                                                                        CTNP()
-                                                                                        if Stop == 1:
-                                                                                            pass
-                                                                                        else:
-                                                                                            ProgrammP5()
+        ProgrammCycle(prNum, prList, CTNP, [])
     else:
         pass
     print("")  # (16.03.2026)

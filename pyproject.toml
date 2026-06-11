@@ -1,9 +1,10 @@
 [project]
 name = "HubBasePE"
-version = "0.0.2.0.0.4"
+version = "0.0.2.0.0.5"
 authors = [
     { name = "Voice659", email = "E.R.Fahretdinov@yandex.ru" },
 ]
+dependencies = []
 description = "HubBasePE – 5 new programs + all the original!!"
 readme = "README.md"
 requires-python = ">=3.5"
