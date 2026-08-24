@@ -5,32 +5,35 @@ import tkinter as tkr
 from tkinter import messagebox
 import sys
 
-__version__ = "0.0.2.0.10"
-__version2__ = "0.0.2.0.1.0"
-__parameters__ = "(default, Aug 23 2026, 22:51:10)"
+__version__ = "0.0.2.0.11"
+__parameters__ = "(plus, Aug 24 2026, 12:58:54)"
+
 PlPr = False
 RA = 0
+progs = 20
 VipAccess = False
 
 
+class User:
+    def __init__(self, login: str):
+        self.VipAccess = False
+        self.username = login
+
+    def log_in(self):
+        self.VipAccess = input("VIP password -- ") == "5280"
+        if not self.VipAccess:
+            print("Incorrect.")
+        else:
+            print("Correct.")
+        global VipAccess
+        VipAccess = self.VipAccess
+
+
 def Enter():  # (13.03.2026)
-    global VipAccess
-    Vips = ["voice659", "vhba", "vipuser", 'hbaofficial', "vvoice", "voice", "v", "vip1"]
-    PassGuess = 0
     print(f"--- HubBase {__version__} {__parameters__} ---")
-    Login = input("Login (If <vip level then press enter): ").lower()
-    if Login in Vips:
-        Password = str(5280)
-        while PassGuess != Password:
-            PassGuess = input("Password for " + Login + ": ")
-            if PassGuess != Password:
-                print("Incorrect")
-        VipAccess = True
-    if Login == "":
-        Login = "usr"
-    print("Login successful!")
-    if VipAccess:
-        PassGuess = str(5280)
+    User_obj = User(input("Login: ").lower())
+    User_obj.log_in()
+    return User_obj
 
 
 def ProgramCycle(programmList: dict, TransitionMethod, TransitionMethodargs: list):
@@ -115,9 +118,9 @@ def Programm5():  # (15.03.2026)
     elif User_reply == "N":
         print("Well, robots don't like you either")
         global VipAccess
-        if VipAccess == "T":
+        if VipAccess:
             print("--Vip level access taken--")
-        VipAccess = "F"
+        VipAccess = False
     elif User_reply == "M":
         print("Make up your mind, human")
     else:
@@ -175,14 +178,13 @@ def Programm7():  # (17.03.2026)
     print("------------------------------------------")
     print("            Checking VipAccess            ")
     print("------------------------------------------")
-    global VipAccess
     time.sleep(1)
-    if VipAccess == "T":
-        print("VipAccess = 'T'")
+    if VipAccess:
+        print("VipAccess = True")
         print("--Access granted--")
         print("Password =", APass)
     else:
-        print("VipAccess = 'F'")
+        print("VipAccess = False")
         APassGuess = input("Please enter the password -- ").upper()
         while APassGuess != APass:
             print("")
@@ -204,7 +206,7 @@ def Programm7():  # (17.03.2026)
 
 def Programm8():  # (18.03.2026)
     GNum = str(random.randint(1, 20))
-    if VipAccess == "T":
+    if VipAccess:
         GPstate = input("Learn correct answer(skips programm)[Y/N] -- ").upper()
         if GPstate != "Y":
             GGuess = input("Can you guess my number. It is inbetween 1 to 20 -- ")
@@ -499,7 +501,8 @@ def Programm19():  # (29.04.2026)
                     gameOver = True
                     square.config(bg="red")
                     print("Game over! You hit a bomb!")
-                    if VipAccess == "T":
+                    print("Your score was: ", score)
+                    if VipAccess:
                         if PFQ == "Y":
                             print("**Even with a cheat!!!**")
                     print("Your score was:", score)
@@ -536,7 +539,7 @@ def Programm19():  # (29.04.2026)
                     if squaresLeft == 0:
                         gameOver = True
                         print("Well done!")
-                        print("Your score was:", score)
+                        print("Your score was: ", score)
 
         def layout_minefield(window, minefield):
             global VipAccess
@@ -560,7 +563,7 @@ def Programm19():  # (29.04.2026)
         global VipAccess, minefield, PFQ
         window3 = tkr.Tk()
         create_minefield(minefield, window3)
-        if VipAccess == "T":
+        if VipAccess:
             PFQ = input("Do you want a cheat?[Y/N] -- ").upper()
             if PFQ == "Y":
                 printfield(minefield)
@@ -615,8 +618,9 @@ def Programm20():
         global canvasHeight
         (ballLeft, ballTop, ballRight, ballBottom) = canvas2.coords(ball)
         if ballTop > canvasHeight:
+            print("Your score was: ", str(score))
             PlayAgain = tkr.messagebox.askyesno(message="Play again?")
-            if PlayAgain == True:
+            if PlayAgain:
                 reset()
             else:
                 close()
@@ -636,7 +640,7 @@ def Programm20():
             rightPressed = 0
 
     def setup_Tennis():
-        global bat, ball, windowOpen, batSpeed, rightPressed, leftPressed, canvas2, canvasWidth, canvasHeight, ballMoveX, ballMoveY, setBatBottom, setBatTop, window4
+        global bat, ball, windowOpen, batSpeed, rightPressed, leftPressed, canvas2, canvasWidth, canvasHeight, ballMoveX, ballMoveY, setBatBottom, setBatTop, window4, score, bounceCount
         canvasWidth = 750
         canvasHeight = 500
         window4 = tkr.Tk()
@@ -652,6 +656,8 @@ def Programm20():
         ballMoveY = -4
         setBatTop = canvasHeight - 40
         setBatBottom = canvasHeight - 30
+        score = 0
+        bounceCount = 0
         window4.protocol("WM_DELETE_WINDOW", close)
         window4.bind("<KeyPress>", on_key_press)
         window4.bind("<KeyRelease>", on_key_release)
@@ -659,11 +665,13 @@ def Programm20():
         canvas2.coords(ball, 20, setBatTop - 10, 30, setBatTop)
 
     def reset():
-        global bat, ball, windowOpen, batSpeed, rightPressed, leftPressed, canvas2, canvasWidth, ballMoveX, ballMoveY, setBatBottom, setBatTop, window4
+        global bat, ball, windowOpen, batSpeed, rightPressed, leftPressed, canvas2, canvasWidth, ballMoveX, ballMoveY, setBatBottom, setBatTop, window4, score, bounceCount
         leftPressed = 0
         rightPressed = 0
         ballMoveX = 4
         ballMoveY = -4
+        score = 0
+        bounceCount = 0
         canvas2.coords(bat, 10, setBatTop, 50, setBatBottom)
         canvas2.coords(ball, 20, setBatTop - 10, 30, setBatTop)
 
@@ -941,116 +949,44 @@ def Start(pprList):
 
 
 # CodeBase
-def Code(prList: dict):
+def Code(prList: dict, User: User):
     TAEstate = "N"  # (15.03.2026)
-    EPstate = "N"
-    if VipAccess:
+    if User.VipAccess:
         TAEstate = input("Skip procedure[Y/N] -- ").upper()
     if TAEstate != "Y":
         ProgramCycle(prList, CTNP, [])
     else:
         pass
     print("")  # (16.03.2026)
-    print("Stop!")
-    print("")
     print("------------------")
     print("Checking VipAccess")
     print("------------------")
     print("")
     time.sleep(1.5)
-    if VipAccess:
+    if User.VipAccess:
         print("VipAccess = 'T'")
-        Restart(prList)
+        Restart(prList, User)
     else:
         print("VipAccess = 'F'")
-        print("You shall not pass")
-        global RA
-        RA = int(RA) + 1
-        print("Restart №" + str(RA), "initializing")
-        Restart(prList)
+        print("Goodbye!")
+        sys.exit(0)
 
 
-def Restart(prList: dict):  # (16.03.2026)
-    if not VipAccess:
-        Code(prList)
+def Restart(prList: dict, User: User):  # (16.03.2026)
+    if not User.VipAccess:
+        Code(prList, User)
     else:
         E_C = input("Do you want to exit the programm?[Y/N] -- ").upper()
         if E_C == "N":
             PrStart = input("What programm to launch? -- ")
-            if PrStart == "2":
-                Programm2()
-                Restart(prList)
-            elif PrStart == "3":
-                Programm3()
-                Restart(prList)
-            elif PrStart == "4":
-                Programm4()
-                Restart(prList)
-            elif PrStart == "5":
-                Programm5()
-                Restart(prList)
-            elif PrStart == "6":
-                Programm6()
-                Restart(prList)
-            elif PrStart == "7":
-                Programm7()
-                Restart(prList)
-            elif PrStart == "8":
-                Programm8()
-                Restart(prList)
-            elif PrStart == "9":
-                Programm9()
-                Restart(prList)
-            elif PrStart == "10":
-                Programm10()
-                Restart(prList)
-            elif PrStart == "11":
-                Programm11()
-                Restart(prList)
-            elif PrStart == "12":
-                Programm12()
-                Restart(prList)
-            elif PrStart == "13":
-                Programm13()
-                Restart(prList)
-            elif PrStart == "14":
-                Programm14()
-                Restart(prList)
-            elif PrStart == "15":
-                Programm15()
-                Restart(prList)
-            elif PrStart == "16":
-                Programm16()
-                Restart(prList)
-            elif PrStart == "17":
-                Programm17()
-                Restart(prList)
-            elif PrStart == "18":
-                Programm18()
-                Restart(prList)
-            elif PrStart == "19":
-                Programm19()
-                Restart(prList)
-            elif PrStart == "20":
-                Programm20()
-                Restart(prList)
-            elif PrStart == "P1":
-                Main.ProgrammP1()
-                Restart(prList)
-            elif PrStart == "P2":
-                Main.ProgrammP2()
-                Restart(prList)
-            elif PrStart == "P3":
-                Main.ProgrammP3()
-                Restart(prList)
-            elif PrStart == "P4":
-                Main.ProgrammP4()
-                Restart(prList)
-            elif PrStart == "P5":
-                Main.ProgrammP5()
-                Restart(prList)
-            else:
-                Code(prList)
+            if "P" in PrStart:
+                PrStart = int(PrStart.replace("P", "")) + progs
+            try:
+                prList[PrStart]()
+                Restart(prList, User)
+            except KeyError:
+                print(f"Programm {PrStart} does not exist")
+                sys.exit(1)
         else:
             pass
 
@@ -1058,5 +994,5 @@ def Restart(prList: dict):  # (16.03.2026)
 # (16.03.2026)
 if __name__ == '__main__':
     prList, modules = Setup_HubBase()
-    Enter()
-    Code(prList)
+    User = Enter()
+    Code(prList, User)
